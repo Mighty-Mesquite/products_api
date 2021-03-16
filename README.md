@@ -1,1 +1,1 @@
-# sdc-products
+# products_api
