@@ -47,6 +47,5 @@ module.exports = {
         // response.status(200).send(data)
       }
     })
-    response.send('Done')
   }
 }
