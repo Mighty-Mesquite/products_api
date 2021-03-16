@@ -20,7 +20,7 @@ CREATE TABLE features (
   value VARCHAR (100) NOT NULL DEFAULT '',
   product_id INT NOT NULL,
   FOREIGN KEY (product_id)
-  REFERENCES product(product_id)
+  REFERENCES products(product_id)
   ON DELETE CASCADE,
   PRIMARY KEY (feature_id)
 );
@@ -30,10 +30,10 @@ CREATE TABLE styles (
   name VARCHAR(50) NOT NULL DEFAULT '',
   original_price VARCHAR (50) NOT NULL DEFAULT '',
   sale_price VARCHAR (50) NOT NULL DEFAULT '',
-  default BOOLEAN,
+  default_style BOOLEAN,
   product_id INT NOT NULL,
   FOREIGN KEY (product_id)
-  REFERENCES product(product_id)
+  REFERENCES products(product_id)
   ON DELETE CASCADE,
   PRIMARY KEY (style_id)
 );
@@ -45,7 +45,7 @@ CREATE TABLE skus (
   quantity INT NOT NULL DEFAULT 0,
   style_id INT NOT NULL,
   FOREIGN KEY (style_id)
-  REFERENCES style(style_id)
+  REFERENCES styles(style_id)
   ON DELETE CASCADE,
   PRIMARY KEY (sku_id)
 );
@@ -56,7 +56,7 @@ CREATE TABLE photos (
   url VARCHAR(700) NOT NULL DEFAULT '',
   style_id INT NOT NULL,
   FOREIGN KEY (style_id)
-  REFERENCES style(style_id)
+  REFERENCES styles(style_id)
   ON DELETE CASCADE,
   PRIMARY KEY (photos_id)
 );
@@ -66,10 +66,10 @@ CREATE TABLE related (
   product1_id INT NOT NULL,
   product2_id INT NOT NULL,
   FOREIGN KEY (product1_id)
-  REFERENCES product(product_id)
+  REFERENCES products(product_id)
   ON DELETE CASCADE,
   FOREIGN KEY (product2_id)
-  REFERENCES product(product_id)
+  REFERENCES products(product_id)
   ON DELETE CASCADE,
   PRIMARY KEY (related_id)
 );
