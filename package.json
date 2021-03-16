@@ -1,0 +1,19 @@
+{
+  "name": "products_api",
+  "version": "1.0.0",
+  "description": "HackReactor SDC",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mighty-Mesquite/products_api.git"
+  },
+  "author": "Dana Walsh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mighty-Mesquite/products_api/issues"
+  },
+  "homepage": "https://github.com/Mighty-Mesquite/products_api#readme"
+}
