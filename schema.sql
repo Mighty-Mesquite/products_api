@@ -17,7 +17,7 @@ CREATE TABLE products (
 CREATE TABLE features (
   feature_id INT NOT NULL AUTO_INCREMENT,
   feature VARCHAR(100) NOT NULL DEFAULT '',
-  value VARCHAR (100) NOT NULL DEFAULT '',
+  value VARCHAR (100) DEFAULT '',
   product_id INT NOT NULL,
   FOREIGN KEY (product_id)
   REFERENCES products(product_id)
@@ -30,14 +30,13 @@ CREATE TABLE styles (
   name VARCHAR(50) NOT NULL DEFAULT '',
   original_price VARCHAR (50) NOT NULL DEFAULT '',
   sale_price VARCHAR (50) NOT NULL DEFAULT '',
-  default_style BOOLEAN,
+  default_style TINYINT,
   product_id INT NOT NULL,
   FOREIGN KEY (product_id)
   REFERENCES products(product_id)
   ON DELETE CASCADE,
   PRIMARY KEY (style_id)
 );
-
 
 CREATE TABLE skus (
   sku_id INT NOT NULL AUTO_INCREMENT,
