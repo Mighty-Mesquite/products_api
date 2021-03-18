@@ -1,7 +1,7 @@
 const express = require('express');
 
 // Required Files
-// const db = require('../db/connection.js')
+const db = require('../db/connection.js')
 const controller = require ('../controller/controller.js')
 
 // Create a New Router Object
