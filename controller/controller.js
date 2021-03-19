@@ -45,12 +45,16 @@ module.exports = {
             productData[0].id = request.params.product_id;
             productData[0].features = [];
             featureData.forEach((feature) => {
-
+              const featureObj = {
+                "feature": feature.feature,
+                "value": feature.value
+              }
+              productData[0].features.push(featureObj);
             })
-
+            response.status(200).send(productData)
           }
         })
-        response.status(200)
+
       }
     })
   },
