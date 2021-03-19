@@ -48,27 +48,22 @@ var compareEntries = function(filePath, tableName) {
     })
 };
 
-const cleanData = function(filePath) {
 
-}
+function cleanData(inputFilePath, outputFilePath) {
+  const fileStream = fs.createReadStream(inputFilePath);
+  const outputFileStream = fs.createWriteStream(outputFilePath);
 
-const dataCheck = function(filePath, colNumber) {
-  var readStream = fs.createReadStream(filePath, 'utf8');
-  return new Promise(function(resolve, reject) {
-    let data = [];
-    readStream.on("data", (chunk) => {
-      // var arrayOfLines = chunk.split('\n')
-      data.push(chunk)
-      // console.log(typeof chunk)
-    });
-    readStream.on("end", () => resolve(data));
-    readStream.on("error", error => reject(error))
+  const rl = readline.createInterface({
+    input: fileStream,
+    output: outputFileStream,
+    crlfDelay: Infinity
   })
-    .then((data) => {
-      console.log(data[0])
-    })
-    .catch((error) => {
-      console.log(error)
+  let count = 0;
+  rl.on('line', (line) => {
+      let fields = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+      if (fields) line = fields.join(',');
+      rl.output.write(`${line}\n`);
+      count++;
     })
 }
 
@@ -76,10 +71,32 @@ let productsFilePath = path.join('./data/product.csv')
 let featuresFilePath = path.join('./data/features.csv')
 let stylesFilePath = path.join('./data/styles.csv')
 let photosFilePath = path.join('./data/photos.csv')
+let photosTestFilePath = path.join('./data/photo.test.csv')
+
+let cleanPhotosFilePath = path.join('./cleanData/photo.test.csv');
 
 // readCSV(productsFilePath);
 // compareEntries(productsFilePath, 'products')
 // compareEntries(featuresFilePath, 'features')
 // compareEntries(stylesFilePath, 'styles')
 
-dataCheck(photosFilePath, 2)
+cleanData(photosTestFilePath, cleanPhotosFilePath);
+
+
+  // var readStream = fs.createReadStream(filePath, 'utf8');
+  // return new Promise(function(resolve, reject) {
+  //   let data = [];
+  //   readStream.on("data", (chunk) => {
+  //     // var arrayOfLines = chunk.split('\n')
+  //     data.push(chunk)
+  //     // console.log(typeof chunk)
+  //   });
+  //   readStream.on("end", () => resolve(data));
+  //   readStream.on("error", error => reject(error))
+  // })
+  //   .then((data) => {
+  //     console.log(data[0])
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //   })
