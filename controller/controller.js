@@ -2,7 +2,7 @@ const db = require('../db/connection.js');
 
 module.exports = {
   getProducts: (request, response) => {
-    // check to see if there is a specific count and page on the request
+    console.log('getting products')
     if (Object.keys(request.query).length > 0) {
       if (request.query.page && request.query.count) {
         console.log('There is a specified page AND count')
@@ -20,7 +20,6 @@ module.exports = {
         console.log('There is a specified page')
       }
     } else {
-      // default
       db.query(`SELECT * FROM products LIMIT 5`, (error, data) => {
         if (error) {
           console.log('ERROR', error);
@@ -51,10 +50,9 @@ module.exports = {
               }
               productData[0].features.push(featureObj);
             })
-            response.status(200).send(productData)
+            response.status(200).send(productData[0])
           }
         })
-
       }
     })
   },
@@ -80,13 +78,12 @@ module.exports = {
         data.forEach((item) => {
           styleIDs.add(item.style_id);
         })
-        // console.log(styleIDs);
         styleIDs.forEach((ID) => {
           const styleObject = {
             "style_id": ID,
             "name": '',
             "original_price": '',
-            "sale-price": '',
+            "sale_price": '',
             "default?": '',
             "photos": [],
             "skus": {}
@@ -100,7 +97,6 @@ module.exports = {
             }
           }
           result.results.push(styleObject);
-
         })
         return new Promise(function(resolve, reject) {
           db.query(`SELECT * FROM photos WHERE style_id IN (SELECT style_id FROM styles WHERE product_id=${product_id})`, (error, data) => {
@@ -130,15 +126,12 @@ module.exports = {
                 }
               })
             })
-            // console.log(styleIDs)
-
             return new Promise(function(resolve, reject) {
               db.query(`select * from styles where product_id=${product_id}`, (error, data) => {
                 if (error) {
                   reject(error)
                 } else {
                   resolve(data)
-                  // console.log(data);
                 }
               })
             })
@@ -149,7 +142,11 @@ module.exports = {
                     if (stylesArray[i].style_id === style.style_id) {
                       stylesArray[i].name = style.name;
                       stylesArray[i].original_price = style.original_price;
-                      stylesArray[i]["sale-price"] = style.sale_price;
+                      if (style.sale_price === 'null') {
+                        stylesArray[i].sale_price = null
+                      } else {
+                        stylesArray[i].sale_price = style.sale_price;
+                      }
                       if (style.default_style === 0) {
                         stylesArray[i]["default?"] = false;
                       } else {
@@ -182,7 +179,7 @@ module.exports = {
         data.forEach((item) => {
           related.push(item.related_product_id);
         })
-        response.status(200).send(related)
+        response.send(related)
       }
     })
   }
