@@ -1,11 +1,21 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
+// local
+// var connection = mysql.createConnection({
+//   host: 'localhost',
+//   user: 'root',
+//   password: 'Flagpole09',
+//   database: 'productAPI',
+//   insecureAuth: true
+// })
+
+//docker
 var connection = mysql.createConnection({
-  host: 'localhost',
+  host: 'database',
   user: 'root',
-  password: 'Flagpole09',
+  password: 'password',
   database: 'productAPI',
-  insecureAuth: true
+  waitFoConnections: true,
 })
 
 connection.connect((error)=> {
