@@ -24,18 +24,18 @@ export default function () {
   // check(res, { 'status was 200': (r) => r.status == 200 });
   // sleep(1);
 
-  // //single product
-  // let res = http.get(`${url}products/${productId}`);
-  // check(res, { 'status was 200': (r) => r.status == 200 });
-  // sleep(1);
+  //single product
+  let res = http.get(`${url}products/${productId}`);
+  check(res, { 'status was 200': (r) => r.status == 200 });
+  sleep(1);
 
   // //styles products
   // let res = http.get(`${url}products/${productId}/styles`);
   // check(res, { 'status was 200': (r) => r.status == 200 });
   // sleep(1);
 
-  //related products
-  let res = http.get(`${url}products/${productId}/related`);
-  check(res, { 'status was 200': (r) => r.status == 200 });
-  sleep(1);
+  // //related products
+  // let res = http.get(`${url}products/${productId}/related`);
+  // check(res, { 'status was 200': (r) => r.status == 200 });
+  // sleep(1);
 }
