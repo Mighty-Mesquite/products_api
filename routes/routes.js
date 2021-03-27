@@ -16,6 +16,8 @@ products.get('/products/:product_id/styles', controller.getProductStyles);
 
 products.get('/products/:product_id/related', controller.getRelatedProducts);
 
+products.get('/loaderio-9982dd7bcace4d358167b351af9bc218', controller.verifyTests)
+
 
 module.exports.products = products;
 

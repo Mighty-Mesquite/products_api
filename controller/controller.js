@@ -271,6 +271,9 @@ module.exports = {
         response.send(related)
       }
     })
+  },
+  verifyTests: (request, response) => {
+    response.send('loaderio-9982dd7bcace4d358167b351af9bc218')
   }
 }
 
