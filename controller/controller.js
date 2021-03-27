@@ -2,7 +2,7 @@ const db = require('../db/connection.js');
 
 module.exports = {
   getProducts: (request, response) => {
-    // console.log('getting products')
+    console.log('getting products')
     if (Object.keys(request.query).length > 0) {
       if (request.query.page && request.query.count) {
         // console.log('There is a specified page AND count')

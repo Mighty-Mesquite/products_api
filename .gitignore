@@ -1,3 +1,7 @@
 node_modules
 package-lock.json
 *.csv
+*.pem
+SDC.pem
+sdcServer.pem
+database.sql

@@ -7,17 +7,16 @@ services:
     environment:
       MYSQL_DATABASE: 'productAPI'
       MYSQL_ROOT_PASSWORD: 'password'
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 10
-    volumes:
-      - ./cleanData:/tmp
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
 
   service_server:
-    build: .
+    image: danaewalsh/hr_sdc:service_server1.0
+    restart: on-failure
     depends_on:
-      'database':
+      - database
         condition: service_healthy
     ports:
       - '5000:5000'

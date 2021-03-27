@@ -17,17 +17,18 @@ let getID = () => {
 }
 export default function () {
   const productId = getID();
-  const url = 'http://127.0.0.1:5000/'
+  // const url = 'http://127.0.0.1:5000/';
+  const url = 'http://ec2-54-193-54-147.us-west-1.compute.amazonaws.com/'
 
   // get products
-  // let res = http.get(`${url}products`);
-  // check(res, { 'status was 200': (r) => r.status == 200 });
-  // sleep(1);
-
-  //single product
-  let res = http.get(`${url}products/${productId}`);
+  let res = http.get(`${url}products`);
   check(res, { 'status was 200': (r) => r.status == 200 });
   sleep(1);
+
+  // //single product
+  // let res = http.get(`${url}products/${productId}`);
+  // check(res, { 'status was 200': (r) => r.status == 200 });
+  // sleep(1);
 
   // //styles products
   // let res = http.get(`${url}products/${productId}/styles`);
